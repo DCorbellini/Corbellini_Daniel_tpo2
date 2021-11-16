@@ -10,6 +10,10 @@ public class Principal extends javax.swing.JFrame {
     public Principal(Controladora control) {
         this.control = control;
         initComponents();
+        // me parecio que no estaria bien que el user pueda elegir un numero de cliente
+        // siendo que el programa solo da alta de clientes y ademas el que va a usarlo
+        // es un cliente que no tiene forma de saber que numeros ya estan ocupados,
+        // lo cual crearia una mala experiencia de usuario
         txtNoCliente.setText(Integer.toString(control.siguienteNoCliente()));
     }
     
