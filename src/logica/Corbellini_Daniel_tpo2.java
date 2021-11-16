@@ -9,7 +9,7 @@ public class Corbellini_Daniel_tpo2 {
         Controladora control = new Controladora();
         
         Principal principal = new Principal(control);
-        // valores default de la pantalla, mas chico que esto y empieza a tapar elementos
+        // valores default de la pantalla, mas chico que esto y los elementos se empiezan a superponer
         principal.setMinimumSize(new Dimension(1053, 708));
         principal.setLocationRelativeTo(null);
         principal.setVisible(true);

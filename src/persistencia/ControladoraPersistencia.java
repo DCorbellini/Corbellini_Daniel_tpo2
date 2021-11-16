@@ -22,6 +22,11 @@ public class ControladoraPersistencia {
     // otra opcion seria usar getPerroCount() del jpa pero si un dia el proyecto
     // se extiende para eliminar clientes ese metodo va a retornar valores que
     // pueden estar en uso
+    // y no uso una secuencia con el jpa porque para generar la id necesito crear
+    // un registro vacio, lo cual me dejaria con un registro extra al cerrar el
+    // programa; y si creo el registro y lo elimino la secuencia quedaria en el
+    // siguiente registro, entonces incrementaria de 2 en 2 y el id que aparece
+    // en la gui no seria igual a la que aparece en la db
     public int siguienteId() {
         List<Perro> perros = obtenerPerros();
         
