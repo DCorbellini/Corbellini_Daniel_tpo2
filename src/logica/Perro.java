@@ -16,8 +16,6 @@ import javax.persistence.SequenceGenerator;
 @Entity
 public class Perro implements Serializable {
     @Id
-    @SequenceGenerator(name = "mascotaGen", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mascotaGen")
     private int id;
     @Basic
     private String nombre;

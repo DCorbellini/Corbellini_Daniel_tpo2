@@ -7,33 +7,56 @@ public class Controladora {
     ControladoraPersistencia controlPersistencia = new ControladoraPersistencia();
     
 
-    public void crearPerro(String id, String nombre, String raza, String color, String alergico, String atencionEspecial, String duenio, String cel, String observaciones) throws Exception {
-        System.out.println(nombre);
-        if (nombre.isEmpty()) throw new Exception("Ingrese el nombre del perro");
-        if (raza.isEmpty()) throw new Exception("Ingrese la raza del perro");
-        if (color.isEmpty()) throw new Exception("Ingrese el color del perro");
-        if (alergico.equals("-")) throw new Exception("Selecione si el perro tiene alergias");
-        if (atencionEspecial.equals("-")) throw new Exception("Selecione si el perro necesita atencion especial");
-        if (duenio.isEmpty()) throw new Exception("Ingrese su nombre");
-        if (cel.isEmpty()) throw new Exception("Ingrese su celular");
+    public void guardarPerro(String id, String nombre, String raza, String color, String alergico, String atencionEspecial, String duenio, String cel, String observaciones) throws Exception {
+        if (id.isEmpty()) throw new Exception("Ingrese el numero de cliente");
         
-        Perro perro = new Perro(
-                Integer.parseInt(id),
-                nombre,
-                raza,
-                color,
-                alergico.equals("Si"),
-                atencionEspecial.equals("Si"),
-                duenio,
-                cel,
-                observaciones
-        );
-        controlPersistencia.crearPerro(perro);
+        Perro perro = controlPersistencia.obtenerPerro(Integer.parseInt(id));
+        
+        // si el perro existe, modificale los valores que no esten vacios
+        if (perro != null) {
+            if (!nombre.isEmpty()) 
+                perro.setNombre(nombre);
+            if (!raza.isEmpty()) 
+                perro.setRaza(raza);
+            if (!color.isEmpty()) 
+                perro.setColor(color);
+            if (!alergico.equals("-")) 
+                perro.setAlergico(alergico.equals("Si"));
+            if (!atencionEspecial.equals("-")) 
+                perro.setAtencionEspecial(atencionEspecial.equals("Si"));
+            if (!duenio.isEmpty()) 
+                perro.setDuenio(duenio);
+            if (!cel.isEmpty()) 
+                perro.setCel(cel);
+            
+            controlPersistencia.modificarPerro(perro);
+        }
+        // si no existe, comproba que todos los valores esten cargados y 
+        // crea el perro
+        else {
+            
+            if (nombre.isEmpty()) throw new Exception("Ingrese el nombre del perro");
+            if (raza.isEmpty()) throw new Exception("Ingrese la raza del perro");
+            if (color.isEmpty()) throw new Exception("Ingrese el color del perro");
+            if (alergico.equals("-")) throw new Exception("Selecione si el perro tiene alergias");
+            if (atencionEspecial.equals("-")) throw new Exception("Selecione si el perro necesita atencion especial");
+            if (duenio.isEmpty()) throw new Exception("Ingrese su nombre");
+            if (cel.isEmpty()) throw new Exception("Ingrese su celular");
+        
+            controlPersistencia.crearPerro(new Perro(
+                    Integer.parseInt(id),
+                    nombre,
+                    raza,
+                    color,
+                    alergico.equals("Si"),
+                    atencionEspecial.equals("Si"),
+                    duenio,
+                    cel,
+                    observaciones
+            ));
+        }
     }
     
-    public int siguienteNoCliente() {
-        return controlPersistencia.siguienteId();
-    }    
     
     // todos estos metodos no los uso pero los deje "por las dudas"
     // idem en la controladora de persistencia

@@ -10,7 +10,18 @@ public class Principal extends javax.swing.JFrame {
     public Principal(Controladora control) {
         this.control = control;
         initComponents();
-        txtNoCliente.setText(Integer.toString(control.siguienteNoCliente()));
+    }
+    
+    public void limpiarPantalla() {
+        txtNoCliente.setText("");
+        txtNombre.setText("");
+        txtRaza.setText("");
+        txtColor.setText("");
+        cmbAlergico.setSelectedIndex(0);
+        cmbAtencion.setSelectedIndex(0);
+        txtDuenio.setText("");
+        txtCel.setText("");
+        txtObservaciones.setText("");
     }
 
     /**
@@ -51,6 +62,7 @@ public class Principal extends javax.swing.JFrame {
         btnLimpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1053, 708));
 
         jLabelTitulo.setFont(new java.awt.Font("Yu Gothic", 1, 36)); // NOI18N
         jLabelTitulo.setForeground(new java.awt.Color(51, 102, 255));
@@ -74,8 +86,6 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jLabelTitulo)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        txtNoCliente.setEnabled(false);
 
         cmbAlergico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Si", "No" }));
         cmbAlergico.setToolTipText("");
@@ -184,7 +194,7 @@ public class Principal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
                 .addContainerGap())
         );
 
@@ -199,17 +209,18 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jPanelInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(imgPerro)
-                .addContainerGap())
+                .addGap(18, 18, 18))
         );
         jPanelCuerpoLayout.setVerticalGroup(
             jPanelCuerpoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCuerpoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelCuerpoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanelInput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanelCuerpoLayout.createSequentialGroup()
+                        .addGap(64, 64, 64)
                         .addComponent(imgPerro)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanelInput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -232,11 +243,11 @@ public class Principal extends javax.swing.JFrame {
         jPanelBotonesLayout.setHorizontalGroup(
             jPanelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBotonesLayout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addGap(128, 128, 128)
                 .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 745, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
+                .addGap(128, 128, 128))
         );
         jPanelBotonesLayout.setVerticalGroup(
             jPanelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -276,33 +287,24 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         try {
-            control.crearPerro(txtNoCliente.getText(),
-                                 txtNombre.getText(),
-                                 txtRaza.getText(),
-                                 txtColor.getText(),
-                                 cmbAlergico.getSelectedItem().toString(),
-                                 cmbAtencion.getSelectedItem().toString(),
-                                 txtDuenio.getText(),
-                                 txtCel.getText(),
-                                 txtObservaciones.getText());
+            control.guardarPerro(txtNoCliente.getText(),
+                                                 txtNombre.getText(),
+                                                 txtRaza.getText(),
+                                                 txtColor.getText(),
+                                                 cmbAlergico.getSelectedItem().toString(),
+                                                 cmbAtencion.getSelectedItem().toString(),
+                                                 txtDuenio.getText(),
+                                                 txtCel.getText(),
+                                                 txtObservaciones.getText());
             
-            txtNoCliente.setText(Integer.toString(control.siguienteNoCliente()));
+            limpiarPantalla();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage(), "No se pudo guardar", HEIGHT);
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        // no limpio noCliente ya que no tendria 
-        // sentido limpiarlo para volver a ponerlo
-        txtNombre.setText("");
-        txtRaza.setText("");
-        txtColor.setText("");
-        cmbAlergico.setSelectedIndex(0);
-        cmbAtencion.setSelectedIndex(0);
-        txtDuenio.setText("");
-        txtCel.setText("");
-        txtObservaciones.setText("");
+        limpiarPantalla();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     

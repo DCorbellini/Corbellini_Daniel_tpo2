@@ -16,6 +16,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import logica.Perro;
 import persistencia.exceptions.NonexistentEntityException;
+import persistencia.exceptions.PreexistingEntityException;
 
 /**
  *
@@ -33,17 +34,23 @@ public class PerroJpaController implements Serializable {
     }
     
     
+
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
-    public void create(Perro perro) {
+    public void create(Perro perro) throws PreexistingEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             em.persist(perro);
             em.getTransaction().commit();
+        } catch (Exception ex) {
+            if (findPerro(perro.getId()) != null) {
+                throw new PreexistingEntityException("Perro " + perro + " already exists.", ex);
+            }
+            throw ex;
         } finally {
             if (em != null) {
                 em.close();

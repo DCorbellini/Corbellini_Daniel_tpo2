@@ -10,25 +10,11 @@ public class ControladoraPersistencia {
     PerroJpaController perroJPA = new PerroJpaController();
     
     public void crearPerro(Perro perro) {
-        perroJPA.create(perro);
-    }
-    
-    // decidi hacer esta funcion de esta forma porque es la unica que se me
-    // ocurrio para no repetir ids
-    // otra opcion seria devolver perros.size() pero si un dia el proyecto
-    // se extiende para eliminar clientes ese metodo va a retornar valores que
-    // pueden estar en uso
-    public int siguienteId() {
-        List<Perro> perros = obtenerPerros();
-        
-        // inicializo max en 0 para que el primer id sea 1
-        int max=0;
-        for (int i=0; i<perros.size(); ++i) {
-            if (perros.get(i).getId()>max)
-                max = perros.get(i).getId();
+        try {
+            perroJPA.create(perro);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        return max+1;
     }
     
     public void eliminarPerro(Perro perro) {
