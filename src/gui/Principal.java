@@ -287,7 +287,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         try {
-            control.guardarPerro(txtNoCliente.getText(),
+            String rtnMsg = control.guardarPerro(txtNoCliente.getText(),
                                                  txtNombre.getText(),
                                                  txtRaza.getText(),
                                                  txtColor.getText(),
@@ -298,8 +298,11 @@ public class Principal extends javax.swing.JFrame {
                                                  txtObservaciones.getText());
             
             limpiarPantalla();
+            
+            // agregue este mensaje porque no habia forma de saber si estabas actualizando o creando uno nuevo
+            JOptionPane.showMessageDialog(rootPane, rtnMsg, "Guardado exitosamente", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e.getMessage(), "No se pudo guardar", HEIGHT);
+            JOptionPane.showMessageDialog(rootPane, e.getMessage(), "No se pudo guardar", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 

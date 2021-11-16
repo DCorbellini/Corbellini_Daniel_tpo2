@@ -102,8 +102,8 @@ public class Perro implements Serializable {
         this.atencionEspecial = atencionEspecial;
     }
 
-    public void setDuenio(String cel) {
-        this.cel = duenio;
+    public void setDuenio(String duenio) {
+        this.duenio = duenio;
     }
 
     public void setCel(String cel) {

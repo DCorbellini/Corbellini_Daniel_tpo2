@@ -7,7 +7,7 @@ public class Controladora {
     ControladoraPersistencia controlPersistencia = new ControladoraPersistencia();
     
 
-    public void guardarPerro(String id, String nombre, String raza, String color, String alergico, String atencionEspecial, String duenio, String cel, String observaciones) throws Exception {
+    public String guardarPerro(String id, String nombre, String raza, String color, String alergico, String atencionEspecial, String duenio, String cel, String observaciones) throws Exception {
         if (id.isEmpty()) throw new Exception("Ingrese el numero de cliente");
         
         Perro perro = controlPersistencia.obtenerPerro(Integer.parseInt(id));
@@ -28,8 +28,12 @@ public class Controladora {
                 perro.setDuenio(duenio);
             if (!cel.isEmpty()) 
                 perro.setCel(cel);
+            if (!observaciones.isEmpty()) 
+                perro.setObservaciones(observaciones);
             
             controlPersistencia.modificarPerro(perro);
+            
+            return "Se actualizo el pedido del cliente " + perro.getDuenio() + ", nro cliente: " + id;
         }
         // si no existe, comproba que todos los valores esten cargados y 
         // crea el perro
@@ -54,6 +58,9 @@ public class Controladora {
                     cel,
                     observaciones
             ));
+            
+            return "El pedido de " + perro.getDuenio() + ", nro cliente: " + id
+                    + " fue guardado correctamente";
         }
     }
     
