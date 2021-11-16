@@ -12,6 +12,18 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         txtNoCliente.setText(Integer.toString(control.siguienteNoCliente()));
     }
+    
+    public void limpiarPantalla() {
+        // no limpio el nro de cliente porque no hay motivo para borrarlo y volver a ponerlo
+        txtNombre.setText("");
+        txtRaza.setText("");
+        txtColor.setText("");
+        cmbAlergico.setSelectedIndex(0);
+        cmbAtencion.setSelectedIndex(0);
+        txtDuenio.setText("");
+        txtCel.setText("");
+        txtObservaciones.setText("");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -51,6 +63,7 @@ public class Principal extends javax.swing.JFrame {
         btnLimpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1053, 708));
 
         jLabelTitulo.setFont(new java.awt.Font("Yu Gothic", 1, 36)); // NOI18N
         jLabelTitulo.setForeground(new java.awt.Color(51, 102, 255));
@@ -184,7 +197,7 @@ public class Principal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -195,22 +208,22 @@ public class Principal extends javax.swing.JFrame {
         jPanelCuerpoLayout.setHorizontalGroup(
             jPanelCuerpoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCuerpoLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanelInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(32, 32, 32)
                 .addComponent(imgPerro)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelCuerpoLayout.setVerticalGroup(
             jPanelCuerpoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCuerpoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelCuerpoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelCuerpoLayout.createSequentialGroup()
-                        .addComponent(imgPerro)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanelInput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanelInput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(jPanelCuerpoLayout.createSequentialGroup()
+                .addGap(75, 75, 75)
+                .addComponent(imgPerro)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnGuardar.setText("Guardar");
@@ -232,11 +245,11 @@ public class Principal extends javax.swing.JFrame {
         jPanelBotonesLayout.setHorizontalGroup(
             jPanelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBotonesLayout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 745, Short.MAX_VALUE)
+                .addGap(256, 256, 256)
                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelBotonesLayout.setVerticalGroup(
             jPanelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -276,7 +289,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         try {
-            control.crearPerro(txtNoCliente.getText(),
+            control.guardarPerro(txtNoCliente.getText(),
                                  txtNombre.getText(),
                                  txtRaza.getText(),
                                  txtColor.getText(),
@@ -286,23 +299,15 @@ public class Principal extends javax.swing.JFrame {
                                  txtCel.getText(),
                                  txtObservaciones.getText());
             
+            limpiarPantalla();
             txtNoCliente.setText(Integer.toString(control.siguienteNoCliente()));
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e.getMessage(), "No se pudo guardar", HEIGHT);
+            JOptionPane.showMessageDialog(rootPane, e.getMessage(), "No se pudo guardar", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        // no limpio noCliente ya que no tendria 
-        // sentido limpiarlo para volver a ponerlo
-        txtNombre.setText("");
-        txtRaza.setText("");
-        txtColor.setText("");
-        cmbAlergico.setSelectedIndex(0);
-        cmbAtencion.setSelectedIndex(0);
-        txtDuenio.setText("");
-        txtCel.setText("");
-        txtObservaciones.setText("");
+        limpiarPantalla();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     

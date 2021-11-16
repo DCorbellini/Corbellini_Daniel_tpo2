@@ -1,6 +1,7 @@
 package logica;
 
 import gui.Principal;
+import java.awt.Dimension;
 
 public class Corbellini_Daniel_tpo2 {
 
@@ -8,8 +9,10 @@ public class Corbellini_Daniel_tpo2 {
         Controladora control = new Controladora();
         
         Principal principal = new Principal(control);
-        principal.setVisible(true);
+        // valores default de la pantalla, mas chico que esto y empieza a tapar elementos
+        principal.setMinimumSize(new Dimension(1053, 708));
         principal.setLocationRelativeTo(null);
+        principal.setVisible(true);
         
     }
     

@@ -10,12 +10,16 @@ public class ControladoraPersistencia {
     PerroJpaController perroJPA = new PerroJpaController();
     
     public void crearPerro(Perro perro) {
-        perroJPA.create(perro);
+        try {
+            perroJPA.create(perro);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     // decidi hacer esta funcion de esta forma porque es la unica que se me
     // ocurrio para no repetir ids
-    // otra opcion seria devolver perros.size() pero si un dia el proyecto
+    // otra opcion seria usar getPerroCount() del jpa pero si un dia el proyecto
     // se extiende para eliminar clientes ese metodo va a retornar valores que
     // pueden estar en uso
     public int siguienteId() {

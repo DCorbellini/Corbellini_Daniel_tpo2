@@ -16,8 +16,6 @@ import javax.persistence.SequenceGenerator;
 @Entity
 public class Perro implements Serializable {
     @Id
-    @SequenceGenerator(name = "mascotaGen", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mascotaGen")
     private int id;
     @Basic
     private String nombre;
@@ -104,8 +102,8 @@ public class Perro implements Serializable {
         this.atencionEspecial = atencionEspecial;
     }
 
-    public void setDuenio(String cel) {
-        this.cel = duenio;
+    public void setDuenio(String duenio) {
+        this.duenio = duenio;
     }
 
     public void setCel(String cel) {

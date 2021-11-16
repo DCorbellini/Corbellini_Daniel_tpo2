@@ -7,7 +7,7 @@ public class Controladora {
     ControladoraPersistencia controlPersistencia = new ControladoraPersistencia();
     
 
-    public void crearPerro(String id, String nombre, String raza, String color, String alergico, String atencionEspecial, String duenio, String cel, String observaciones) throws Exception {
+    public void guardarPerro(String id, String nombre, String raza, String color, String alergico, String atencionEspecial, String duenio, String cel, String observaciones) throws Exception {
         System.out.println(nombre);
         if (nombre.isEmpty()) throw new Exception("Ingrese el nombre del perro");
         if (raza.isEmpty()) throw new Exception("Ingrese la raza del perro");
