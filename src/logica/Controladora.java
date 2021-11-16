@@ -33,7 +33,7 @@ public class Controladora {
             
             controlPersistencia.modificarPerro(perro);
             
-            return "Se actualizo el pedido del cliente " + perro.getDuenio() + ", nro cliente: " + id;
+            return "Se actualizo el pedido del cliente " + perro.getDuenio() + " (nro cliente: " + id + ")";
         }
         // si no existe, comproba que todos los valores esten cargados y 
         // crea el perro
@@ -59,8 +59,8 @@ public class Controladora {
                     observaciones
             ));
             
-            return "El pedido de " + perro.getDuenio() + ", nro cliente: " + id
-                    + " fue guardado correctamente";
+            return "El pedido de " + duenio + " (nro cliente: " + id
+                    + ") fue guardado correctamente";
         }
     }
     
